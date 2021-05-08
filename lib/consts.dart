@@ -1,7 +1,6 @@
 
 import 'package:flutter/material.dart';
 
-const String kCatLogo = 'assets/launch_image.png';
 
 const kBackgroundLaunchColor = Color(0xffffcc00);
 const kGoogleSignInButtonColor = Colors.white;

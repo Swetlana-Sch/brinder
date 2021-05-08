@@ -30,6 +30,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_native_splash: ^1.1.8+4
   percent_indicator: ^2.1.7+2
+  flutter_fadein: ^2.0.0
 flutter_native_splash:
   color: "#ffcc00"
   image: assets/launch_image.png
