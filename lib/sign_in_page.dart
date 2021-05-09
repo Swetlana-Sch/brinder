@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:matching_cats/assets.dart';
 import 'package:matching_cats/common%20widgets/sing_in_button.dart';
 import 'package:matching_cats/consts.dart';
+import 'package:matching_cats/screens/home_page_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:matching_cats/utils/authentication_provider.dart';
 
 class SignInPage extends StatefulWidget {
+  static const routeName = '/sign-in-page-screen';
   @override
   _SignInPageState createState() => _SignInPageState();
 }
@@ -23,6 +27,7 @@ class _SignInPageState extends State<SignInPage> {
 
   @override
   Widget build(BuildContext context) {
+    final auth = Provider.of<Authentication>(context);
     return Scaffold(
       backgroundColor: kBackgroundLaunchColor,
       body: AnimatedOpacity(
@@ -56,7 +61,10 @@ class _SignInPageState extends State<SignInPage> {
                 text: 'Sign In with Google',
                 textColor: kGoogleSignInTextColor,
                 color: kGoogleSignInButtonColor,
-                onPressed: () {},
+                onPressed: () async{
+                  await auth.signInWithGoogle(context: context);
+                  Navigator.of(context).pushNamed(HomePageScreen.routeName);
+                },
               ),
               SizedBox(
                 height: 10,

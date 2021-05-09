@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "903196772696",
+    "project_id": "brinder-a1237",
+    "storage_bucket": "brinder-a1237.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:903196772696:android:aadf33915e8321be5fbd2d",
+        "android_client_info": {
+          "package_name": "com.example.matching_cats"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "903196772696-13rbuqqaiu6bt0ep4aunuctbsmmp17e1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.matching_cats",
+            "certificate_hash": "2b6897626786ecf0313645b6eb71091fbd63cbd8"
+          }
+        },
+        {
+          "client_id": "903196772696-sc0o7rkbclk18dllujhufs4eadpj64i5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBoE4X2ZeKo8tFdSzqe27dOvfKGIp9QHlo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "903196772696-sc0o7rkbclk18dllujhufs4eadpj64i5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

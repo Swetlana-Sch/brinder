@@ -31,6 +31,10 @@ dependencies:
   flutter_native_splash: ^1.1.8+4
   percent_indicator: ^2.1.7+2
   flutter_fadein: ^2.0.0
+  firebase_core: ^1.0.1
+  firebase_auth: ^1.0.1
+  google_sign_in: ^5.0.0
+  provider: ^5.0.0
 flutter_native_splash:
   color: "#ffcc00"
   image: assets/launch_image.png
