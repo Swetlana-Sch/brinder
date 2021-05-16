@@ -73,7 +73,11 @@ class _SignInPageState extends State<SignInPage> {
                 text: 'Sign In with Facebook',
                 textColor: kFaceBookSignInTextColor,
                 color: kFaceBookSignInButtonColor,
-                onPressed: () {},
+                onPressed: () async {
+                  await auth.signInWithFacebook();
+                  print('FB sign in pressed');
+                  Navigator.of(context).pushNamed(HomePageScreen.routeName);
+                },
               ),
               SizedBox(
                 height: 10,
