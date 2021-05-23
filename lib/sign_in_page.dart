@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:matching_cats/assets.dart';
 import 'package:matching_cats/common%20widgets/sing_in_button.dart';
 import 'package:matching_cats/consts.dart';
+import 'package:matching_cats/screens/email_sign_in_page.dart';
 import 'package:matching_cats/screens/home_page_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:matching_cats/utils/authentication_provider.dart';
@@ -86,7 +87,9 @@ class _SignInPageState extends State<SignInPage> {
                 text: 'Sign In with Email',
                 textColor: kEmailSignInTextColor,
                 color: kEmailSignInButtonColor,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pushNamed(EmailSignInPage.routeName);
+                },
               ),
             ],
           ),

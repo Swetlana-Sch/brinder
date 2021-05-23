@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_fadein/flutter_fadein.dart';
 import 'package:matching_cats/assets.dart';
 import 'package:matching_cats/consts.dart';
+import 'package:matching_cats/screens/email_sign_in_page.dart';
 import 'package:matching_cats/screens/home_page_screen.dart';
 import 'package:matching_cats/utils/authentication_provider.dart';
 import 'package:provider/provider.dart';
@@ -16,6 +17,8 @@ void main() async {
 }
 
 class CatsMatchApp extends StatelessWidget {
+  var auth;
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -28,6 +31,7 @@ class CatsMatchApp extends StatelessWidget {
         routes: {
           HomePageScreen.routeName: (ctx) => HomePageScreen(),
           SignInPage.routeName: (ctx) => SignInPage(),
+          EmailSignInPage.routeName: (ctx) => EmailSignInPage(auth: auth),
         },
         home: FutureBuilder(
           future: Future.delayed(Duration(seconds: 3)),

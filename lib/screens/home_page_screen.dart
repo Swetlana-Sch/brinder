@@ -12,8 +12,9 @@ class HomePageScreen extends StatelessWidget {
       appBar: AppBar(
         actions: [
           ElevatedButton(
-            onPressed: () {
-              auth.signOut(context: context);
+            onPressed: () async {
+              await auth.signOut();
+              print('FB sign out pressed');
               Navigator.of(context).pushNamed(SignInPage.routeName);
             },
             child: Icon(

@@ -68,19 +68,27 @@ class Authentication with ChangeNotifier {
     }
   }
 
-  Future<void> signOut({required BuildContext context}) async {
-    final GoogleSignIn googleSignIn = GoogleSignIn();
+  // Future<void> signOutGoogle({required BuildContext context}) async {
+  //   final GoogleSignIn googleSignIn = GoogleSignIn();
+  //
+  //   try {
+  //     await googleSignIn.signOut();
+  //     await FirebaseAuth.instance.signOut();
+  //   } catch (e) {
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       customSnackBar(
+  //         content: 'Error signing out. Try again.',
+  //       ),
+  //     );
+  //   }
+  // }
 
-    try {
-      await googleSignIn.signOut();
-      await FirebaseAuth.instance.signOut();
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        customSnackBar(
-          content: 'Error signing out. Try again.',
-        ),
-      );
-    }
+  Future<void> signOut() async {
+    final googleSignIn = GoogleSignIn();
+    await googleSignIn.signOut();
+    final facebookLogin = FacebookLogin();
+    await facebookLogin.logOut();
+    _firebaseAuth.signOut();
   }
 
   Future<User?> signInWithFacebook() async {
@@ -110,4 +118,18 @@ class Authentication with ChangeNotifier {
     }
     throw UnimplementedError();
   }
+
+  // Future<User?> signInWithEmailAndPassWord(String email, String password) async {
+  //   final userCredential = await _firebaseAuth.signInWithCredential(
+  //     EmailAuthProvider.credential(email: email, password: password),
+  //   );
+  //   return userCredential.user;
+  // }
+  //
+  // Future<User?> createUserWithEmailAndPassword(
+  //     String email, String password) async {
+  //   final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
+  //       email: email, password: password);
+  //   return userCredential.user;
+  // }
 }
