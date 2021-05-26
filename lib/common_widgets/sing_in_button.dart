@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:matching_cats/common%20widgets/custom_elevated_button.dart';
+import 'package:matching_cats/common_widgets/custom_elevated_button.dart';
 
 class SignInButton extends CustomElevatedButton{
   SignInButton({

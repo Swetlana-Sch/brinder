@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:matching_cats/sign_in_page.dart';
-import 'package:matching_cats/utils/authentication_provider.dart';
+import 'package:matching_cats/common_widgets/drawer.dart';
+import 'file:///C:/Users/Svetlana-PC/AndroidStudioProjects/matching_cats/lib/screens/sign_in_page.dart';
 import 'package:provider/provider.dart';
+import 'package:matching_cats/providers/authentication_provider.dart';
 
 class HomePageScreen extends StatelessWidget {
   static const routeName = '/home-page-screen';
@@ -9,6 +10,7 @@ class HomePageScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final auth = Provider.of<Authentication>(context);
     return Scaffold(
+      drawer: MyDrawer(),
       appBar: AppBar(
         actions: [
           ElevatedButton(
@@ -23,7 +25,7 @@ class HomePageScreen extends StatelessWidget {
           )
         ],
       ),
-      body: Center(child: Text('You are in the app'),),
+      body: Center(child: Text('You are in the HomeScreen'),),
 
     );
   }

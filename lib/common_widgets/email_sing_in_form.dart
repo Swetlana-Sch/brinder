@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:matching_cats/common%20widgets/sing_in_button.dart';
 import 'package:matching_cats/consts.dart';
-import 'package:matching_cats/utils/authentication_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:matching_cats/providers/authentication_provider.dart';
 
 enum EmailSignInFormType { signIn, register }
 
 class EmailSingInForm extends StatefulWidget {
-  EmailSingInForm({required this.auth});
-  final Authentication auth;
+
   @override
   _EmailSingInFormState createState() => _EmailSingInFormState();
 }
@@ -18,13 +16,23 @@ class _EmailSingInFormState extends State<EmailSingInForm> {
 
   final TextEditingController _passwordController = TextEditingController();
 
+  String get _email => _emailController.text;
+  String get _password => _passwordController.text;
+
   //default value
   EmailSignInFormType _formType = EmailSignInFormType.signIn;
 
-
-  void _submit() async{
-    if (_formType == EmailSignInFormType.signIn) {
-
+  void _submit(Authentication auth) async {
+    try {
+      if (_formType == EmailSignInFormType.signIn) {
+        await auth.signInWithEmailAndPassWord(_email, _password);
+      } else {
+        await auth.createUserWithEmailAndPassword(_email, _password);
+      }
+      // if the registration is successful we dismiss the registration page automatically
+      Navigator.of(context).pop();
+    } catch (e) {
+      print(e.toString());
     }
   }
 
@@ -41,7 +49,13 @@ class _EmailSingInFormState extends State<EmailSingInForm> {
 
   @override
   Widget build(BuildContext context) {
-    final auth = Provider.of<Authentication>(context);
+    // the same results
+    // final auth = Provider.of<Authentication>(context, listen: false);
+    final auth2 = context.read<Authentication>();
+    // the same results
+    // final auth3 = Provider.of<Authentication>(context);
+    // final auth4 = context.watch<Authentication>();
+
     final primaryText = _formType == EmailSignInFormType.signIn
         ? 'Sign in'
         : 'Create an account';
@@ -71,8 +85,8 @@ class _EmailSingInFormState extends State<EmailSingInForm> {
             height: 10,
           ),
           ElevatedButton(
-            onPressed: ()  {
-
+            onPressed: () {
+              _submit(auth2);
             },
             child: Text(primaryText),
             style: kElevatedButtonStyle,

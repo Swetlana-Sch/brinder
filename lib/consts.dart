@@ -19,6 +19,18 @@ const kLaunchTextStyle = TextStyle (
   fontFamily: 'Pacifico-Regular',
 );
 
+const kAppBarTextStyle = TextStyle (
+  fontSize: 20.0,
+  fontWeight: FontWeight.w700,
+  color: Colors.white,
+  fontFamily: 'Pacifico-Regular',
+);
+
+const kDrawerTextStyle = TextStyle(
+  fontSize: 18.0,
+  color: Colors.white,
+);
+
 final ButtonStyle kElevatedButtonStyle = ElevatedButton.styleFrom(
   onPrimary: Colors.white,
   primary: kAppBarColor,

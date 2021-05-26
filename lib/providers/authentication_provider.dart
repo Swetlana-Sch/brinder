@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -6,8 +8,13 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 
 class Authentication with ChangeNotifier {
-
   final _firebaseAuth = FirebaseAuth.instance;
+  FirebaseAuth get firebaseAuth => _firebaseAuth;
+
+  StreamSubscription<User?>? userStream;
+  User? firebaseUser;
+
+  bool isLoading = false;
 
   SnackBar customSnackBar({required String content}) {
     return SnackBar(
@@ -17,6 +24,17 @@ class Authentication with ChangeNotifier {
         style: TextStyle(color: Colors.redAccent, letterSpacing: 0.5),
       ),
     );
+  }
+
+
+  //Using Stream to listen to Authentication State
+  Stream<User?> get authState => firebaseAuth.idTokenChanges();
+
+  Authentication() {
+    userStream = authState.listen((User? user) {
+      print('listener user $user');
+      firebaseUser = user;
+    });
   }
 
   Future<User?> signInWithGoogle({required BuildContext context}) async {
@@ -92,6 +110,8 @@ class Authentication with ChangeNotifier {
   }
 
   Future<User?> signInWithFacebook() async {
+    isLoading = true;
+    notifyListeners();
     final fb = FacebookLogin();
     final response = await fb.logIn(permissions: [
       FacebookPermission.publicProfile,
@@ -102,34 +122,52 @@ class Authentication with ChangeNotifier {
       final userCredential = await _firebaseAuth.signInWithCredential(
         FacebookAuthProvider.credential(accessToken.token),
       );
+      // successful case
+      isLoading = false;
+      notifyListeners();
       return userCredential.user;
     }
     if (response.status == FacebookLoginStatus.cancel) {
+      isLoading = false;
+      notifyListeners();
       throw FirebaseAuthException(
         code: 'ERROR_ABORTED_BY_USER',
         message: 'Sign in aborted by user',
       );
     }
     if (response.status == FacebookLoginStatus.error) {
+      isLoading = false;
+      notifyListeners();
       throw FirebaseAuthException(
         code: 'ERROR_FACEBOOK_LOGIN_FAILED',
         message: response.error!.developerMessage,
       );
     }
+    isLoading = false;
+    notifyListeners();
     throw UnimplementedError();
+
   }
 
-  // Future<User?> signInWithEmailAndPassWord(String email, String password) async {
-  //   final userCredential = await _firebaseAuth.signInWithCredential(
-  //     EmailAuthProvider.credential(email: email, password: password),
-  //   );
-  //   return userCredential.user;
-  // }
-  //
-  // Future<User?> createUserWithEmailAndPassword(
-  //     String email, String password) async {
-  //   final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
-  //       email: email, password: password);
-  //   return userCredential.user;
-  // }
+  Future<User?> signInWithEmailAndPassWord(String email, String password) async {
+    final userCredential = await _firebaseAuth.signInWithCredential(
+      EmailAuthProvider.credential(email: email, password: password),
+    );
+    return userCredential.user;
+  }
+
+  Future<User?> createUserWithEmailAndPassword(
+      String email, String password) async {
+    final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
+        email: email, password: password);
+    return userCredential.user;
+  }
+
+
+
+  @override
+  void dispose() {
+    userStream?.cancel();
+    super.dispose();
+  }
 }
