@@ -7,6 +7,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_fadein/flutter_fadein.dart';
 import 'package:matching_cats/assets.dart';
 import 'package:matching_cats/consts.dart';
+import 'package:matching_cats/providers/user_profile_provider.dart';
 import 'package:matching_cats/screens/email_sign_in_page.dart';
 import 'package:matching_cats/screens/favourites_screen.dart';
 import 'package:matching_cats/screens/home_page_screen.dart';
@@ -32,6 +33,9 @@ class CatsMatchApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (context) => Authentication(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => UserProfile(),
         ),
       ],
       child: MaterialApp(
