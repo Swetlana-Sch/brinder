@@ -74,26 +74,6 @@ class EditModeUserInfoCard extends StatelessWidget {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'My Cats:',
-                  style: TextStyle(fontSize: 18),
-                ),
-                IconButton(
-                  icon: Container(
-                      color: Colors.grey.shade200, child: Icon(Icons.add)),
-                  onPressed: () {
-                    print('Add cat pressed');
-                  },
-                ),
-              ],
-            ),
-          ),
-          // ListView(),
         ],
       ),
     );

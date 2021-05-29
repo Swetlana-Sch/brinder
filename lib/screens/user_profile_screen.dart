@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:matching_cats/common_widgets/drawer.dart';
 import 'package:matching_cats/common_widgets/edit_mode_user_info_card.dart';
+import 'package:matching_cats/common_widgets/my_cats_panel.dart';
 import 'package:matching_cats/common_widgets/view_mode_user_info_card.dart';
 import 'package:matching_cats/providers/user_data_provider.dart';
 import 'package:provider/provider.dart';
@@ -46,17 +47,22 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
           )
         ],
       ),
-      body: _isEditMode == false
-          ? ViewModeUserInfoCard(
-              name: nameController.text,
-              city: cityController.text,
-              number: phoneController.text,
-            )
-          : EditModeUserInfoCard(
-              nameController: nameController,
-              cityController: cityController,
-              phoneController: phoneController,
-            ),
+      body: Column(
+        children: [
+          _isEditMode == false
+              ? ViewModeUserInfoCard(
+                  name: nameController.text,
+                  city: cityController.text,
+                  number: phoneController.text,
+                )
+              : EditModeUserInfoCard(
+                  nameController: nameController,
+                  cityController: cityController,
+                  phoneController: phoneController,
+                ),
+          MyCatsPanel(),
+        ],
+      ),
     );
   }
 }

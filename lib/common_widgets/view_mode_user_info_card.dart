@@ -67,27 +67,6 @@ class ViewModeUserInfoCard extends StatelessWidget {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'My Cats:',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-                ),
-                IconButton(
-                  icon: Icon(
-                    Icons.add,
-                    size: 35,
-                  ),
-                  onPressed: () {
-                    print('Add cat pressed');
-                  },
-                ),
-              ],
-            ),
-          ),
           // ListView(),
         ],
       ),
