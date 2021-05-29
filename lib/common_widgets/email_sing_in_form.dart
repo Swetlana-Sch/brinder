@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:matching_cats/consts.dart';
+import 'package:matching_cats/theme.dart';
 import 'package:provider/provider.dart';
 import 'package:matching_cats/providers/authentication_provider.dart';
 

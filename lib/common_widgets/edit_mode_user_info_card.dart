@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:matching_cats/consts.dart';
+import 'package:matching_cats/theme.dart';
 
 class EditModeUserInfoCard extends StatelessWidget {
   final TextEditingController? nameController;
@@ -28,8 +28,7 @@ class EditModeUserInfoCard extends StatelessWidget {
                       children: [
                         Text(
                           'Name:   ',
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w600),
+                          style: Theme.of(context).textTheme.bodyText2,
                         ),
                         Expanded(
                           child: TextField(
@@ -45,8 +44,7 @@ class EditModeUserInfoCard extends StatelessWidget {
                       children: [
                         Text(
                           'City:       ',
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w600),
+                          style: Theme.of(context).textTheme.bodyText2,
                         ),
                         Expanded(
                           child: TextField(
@@ -62,8 +60,7 @@ class EditModeUserInfoCard extends StatelessWidget {
                       children: [
                         Text(
                           'Phone:  ',
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w600),
+                          style: Theme.of(context).textTheme.bodyText2,
                         ),
                         Expanded(
                           child: TextField(

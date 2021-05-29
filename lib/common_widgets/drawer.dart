@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:matching_cats/consts.dart';
+import 'package:matching_cats/theme.dart';
 import 'package:matching_cats/screens/favourites_screen.dart';
 import 'package:matching_cats/screens/home_page_screen.dart';
 import 'package:matching_cats/screens/messages_screen.dart';

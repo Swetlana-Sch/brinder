@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:matching_cats/providers/user_profile_provider.dart';
-import 'package:provider/provider.dart';
 
 class ViewModeUserInfoCard extends StatelessWidget {
   final String? name;
@@ -24,7 +22,10 @@ class ViewModeUserInfoCard extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Text(' Name:  ', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),),
+                        Text(
+                          ' Name:  ',
+                          style: Theme.of(context).textTheme.bodyText2,
+                        ),
                         Text(name!),
                       ],
                     ),
@@ -37,7 +38,11 @@ class ViewModeUserInfoCard extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        Text(' City:      ', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),),
+                        Text(
+                          //TODO: refactor to spacebetween
+                          ' City:      ',
+                          style: Theme.of(context).textTheme.bodyText2,
+                        ),
                         Text(city!),
                       ],
                     ),
@@ -50,7 +55,10 @@ class ViewModeUserInfoCard extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        Text(' Phone:  ', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),),
+                        Text(
+                          ' Phone:  ',
+                          style: Theme.of(context).textTheme.bodyText2,
+                        ),
                         Text(number!),
                       ],
                     )
@@ -69,7 +77,10 @@ class ViewModeUserInfoCard extends StatelessWidget {
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                 ),
                 IconButton(
-                  icon: Icon(Icons.add, size: 35,),
+                  icon: Icon(
+                    Icons.add,
+                    size: 35,
+                  ),
                   onPressed: () {
                     print('Add cat pressed');
                   },

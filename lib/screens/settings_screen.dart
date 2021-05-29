@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:matching_cats/common_widgets/drawer.dart';
-import 'package:matching_cats/consts.dart';
+import 'package:matching_cats/theme.dart';
 
 class SettingsScreen extends StatelessWidget {
   static const routeName = '/settings-screen';

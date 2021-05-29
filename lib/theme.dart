@@ -12,6 +12,16 @@ const kFaceBookSignInTextColor = Colors.white;
 const kEmailSignInButtonColor = Colors.teal;
 const kEmailSignInTextColor = Colors.white;
 
+
+ThemeData lightTheme = ThemeData(
+//TODO: add textTheme
+primaryColor: Colors.orange,
+primarySwatch: Colors.orange,
+  textTheme: TextTheme(
+    bodyText2: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+  )
+);
+
 const kLaunchTextStyle = TextStyle (
   fontSize: 50.0,
   fontWeight: FontWeight.w900,

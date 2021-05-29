@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:matching_cats/common_widgets/drawer.dart';
 import 'package:matching_cats/providers/authentication_provider.dart';
 import 'package:matching_cats/common_widgets/email_sing_in_form.dart';
-import 'package:matching_cats/consts.dart';
+import 'package:matching_cats/theme.dart';
 
 
 class EmailSignInPage extends StatelessWidget {

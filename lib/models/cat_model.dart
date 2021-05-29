@@ -1,9 +1,13 @@
-import 'package:flutter/cupertino.dart';
+import 'package:matching_cats/utils/app_utils.dart';
 
 enum CatGender {
-  Male,
-  Female,
+  male,
+  female,
 }
+
+// why do we need this variable?
+final typeValues =
+    EnumValues({"male": CatGender.male, 'female': CatGender.female});
 
 class CatModel {
   String? catName;
@@ -23,13 +27,23 @@ class CatModel {
     this.catCity,
     this.catAge,
     this.catDescription,
-    this.catGender,
+    this.catGender = CatGender.male,
   });
 
   @override
   String toString() {
     return 'CatModel{catName: $catName, catImage: $catImage, catBread: $catBread, catPrice: $catPrice, catCity: $catCity, catAge: $catAge, catDescription: $catDescription}';
   }
+
+  // factory Hit.fromJson(Map<String, dynamic> json) => Hit(
+  //   type: json["type"] == null ? null : typeValues.map[json["type"]],
+  // );
+  //
+  //
+  // Map<String, dynamic> toJson() =>
+  //     {
+  //       "type": type == null ? null : typeValues.reverse![type!],
+  //     }
 
   factory CatModel.fromJson(Map<String, dynamic> json) => CatModel(
         catName: json['cat_name'],
@@ -39,7 +53,7 @@ class CatModel {
         catAge: json['cat_age'],
         catDescription: json['cat_description'],
         catCity: json['cat_city'],
-        catGender: json['cat_gender'],
+        catGender: typeValues.map[json['cat_gender']],
       );
 
   Map<String, dynamic> toJson() => {
@@ -50,35 +64,6 @@ class CatModel {
         'cat_age': catAge,
         'cat_description': catDescription,
         'cat_city': catCity,
-        'cat_gender': catGender,
+        'cat_gender': typeValues.reverse![catGender],
       };
-
-  List<CatModel> myCats = [
-    CatModel(
-        catName: 'Lucy',
-        catImage:
-            'https://www.thepedigreepaws.com/web/kitten_breed/4/1594239196-british-shorthair-for-sale-the-pedigree-paws.jpg',
-        catBread: 'British shorthair',
-        catPrice: 800,
-        catCity: 'Lviv',
-        catAge: 4,
-        catDescription: 'Awesome red cat with green eyes'),
-    CatModel(
-        catName: 'Mark',
-        catImage:
-            'https://i.pinimg.com/originals/cb/b4/c3/cbb4c3585048e06cb3b49ccb30e4343d.png',
-        catBread: 'Sphynx',
-        catPrice: 700,
-        catCity: 'Poltava',
-        catAge: 2.5,
-        catDescription: 'Awesome sphynx'),
-    CatModel(
-        catName: 'BooBoo',
-        catImage:
-            'https://catunited.com/wp-content/uploads/2020/07/yeswecatcattery_110042481_1033227033746460_476239828683541996_n.jpg',
-        catPrice: 900,
-        catCity: 'Kherson',
-        catAge: 5,
-        catDescription: 'Beautiful Georgian looking cat'),
-  ];
 }

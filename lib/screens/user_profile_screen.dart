@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:matching_cats/common_widgets/drawer.dart';
 import 'package:matching_cats/common_widgets/edit_mode_user_info_card.dart';
 import 'package:matching_cats/common_widgets/view_mode_user_info_card.dart';
-import 'package:matching_cats/providers/user_profile_provider.dart';
+import 'package:matching_cats/providers/user_data_provider.dart';
 import 'package:provider/provider.dart';
 
 class UserProfileScreen extends StatefulWidget {
@@ -21,7 +21,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
   @override
   void initState() {
     // TODO: implement initState
-    final userData = Provider.of<UserProfile>(context, listen: false);
+    final userData = Provider.of<UserDataProvider>(context, listen: false);
     nameController.text = userData.userName!;
     cityController.text = userData.userCity!;
     phoneController.text = userData.userPhoneNumber!;

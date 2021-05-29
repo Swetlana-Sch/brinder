@@ -3,19 +3,17 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:flutter_fadein/flutter_fadein.dart';
 import 'package:matching_cats/assets.dart';
-import 'package:matching_cats/consts.dart';
-import 'package:matching_cats/providers/user_profile_provider.dart';
+import 'package:matching_cats/providers/authentication_provider.dart';
+import 'package:matching_cats/providers/user_data_provider.dart';
 import 'package:matching_cats/screens/email_sign_in_page.dart';
 import 'package:matching_cats/screens/favourites_screen.dart';
 import 'package:matching_cats/screens/home_page_screen.dart';
-import 'package:matching_cats/providers/authentication_provider.dart';
 import 'package:matching_cats/screens/messages_screen.dart';
 import 'package:matching_cats/screens/search_screen.dart';
 import 'package:matching_cats/screens/settings_screen.dart';
 import 'package:matching_cats/screens/user_profile_screen.dart';
+import 'package:matching_cats/theme.dart';
 import 'package:provider/provider.dart';
 
 import 'screens/sign_in_page.dart';
@@ -35,14 +33,11 @@ class CatsMatchApp extends StatelessWidget {
           create: (context) => Authentication(),
         ),
         ChangeNotifierProvider(
-          create: (context) => UserProfile(),
+          create: (context) => UserDataProvider(),
         ),
       ],
       child: MaterialApp(
-        theme: ThemeData(
-          primaryColor: Colors.orange,
-          primarySwatch: Colors.orange,
-        ),
+        theme: lightTheme,
         routes: {
           HomePageScreen.routeName: (ctx) => HomePageScreen(),
           SignInPage.routeName: (ctx) => SignInPage(),

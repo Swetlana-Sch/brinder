@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:matching_cats/assets.dart';
 import 'package:matching_cats/common_widgets/drawer.dart';
 import 'package:matching_cats/common_widgets/sing_in_button.dart';
-import 'package:matching_cats/consts.dart';
+import 'package:matching_cats/theme.dart';
 import 'package:matching_cats/screens/email_sign_in_page.dart';
 import 'package:matching_cats/screens/home_page_screen.dart';
 import 'package:provider/provider.dart';
