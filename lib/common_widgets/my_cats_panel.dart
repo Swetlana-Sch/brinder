@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:matching_cats/providers/user_data_provider.dart';
+import 'package:matching_cats/screens/add_cat_screen.dart';
 import 'package:provider/provider.dart';
 
 class MyCatsPanel extends StatelessWidget {
@@ -28,6 +29,8 @@ class MyCatsPanel extends StatelessWidget {
                 ),
                 onPressed: () {
                   print('Add cat pressed');
+                  Navigator.of(context).pushNamed(AddCatScreen.routeName);
+
                 },
               ),
             ],
@@ -37,7 +40,7 @@ class MyCatsPanel extends StatelessWidget {
               itemBuilder: (BuildContext cxt, int index) {
                 return Row(
                   children: [
-                    Text(catData.myCats[index].catName!)
+                      Text(catData.myCats[index].catName!)
                   ],
                 );
               },

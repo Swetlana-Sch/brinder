@@ -16,6 +16,14 @@ class MyDrawer extends StatelessWidget {
         child: Column(
           children: [
             AppBar(
+// automaticallyImplyLeading: false,
+              leading: IconButton(
+                // TODO: Change icon to Image.asset https://flutter.dev/docs/development/ui/assets-and-images#resolution-aware
+                icon: Icon(Icons.format_list_bulleted_rounded),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
               title: Text(
                 'Brinder',
                 style: kAppBarTextStyle,
@@ -37,7 +45,7 @@ class MyDrawer extends StatelessWidget {
                 'User Profile',
                 style: kDrawerTextStyle,
               ),
-              onTap: (){
+              onTap: () {
                 Navigator.of(context)
                     .pushReplacementNamed(UserProfileScreen.routeName);
               },
@@ -48,7 +56,8 @@ class MyDrawer extends StatelessWidget {
                 style: kDrawerTextStyle,
               ),
               onTap: () {
-                Navigator.of(context).pushReplacementNamed(SearchScreen.routeName);
+                Navigator.of(context)
+                    .pushReplacementNamed(SearchScreen.routeName);
               },
             ),
             ListTile(
@@ -57,7 +66,8 @@ class MyDrawer extends StatelessWidget {
                 style: kDrawerTextStyle,
               ),
               onTap: () {
-                Navigator.of(context).pushReplacementNamed(MessagesScreen.routeName);
+                Navigator.of(context)
+                    .pushReplacementNamed(MessagesScreen.routeName);
               },
             ),
             ListTile(
@@ -66,7 +76,8 @@ class MyDrawer extends StatelessWidget {
                 style: kDrawerTextStyle,
               ),
               onTap: () {
-                Navigator.of(context).pushReplacementNamed(FavouritesScreen.routeName);
+                Navigator.of(context)
+                    .pushReplacementNamed(FavouritesScreen.routeName);
               },
             ),
             ListTile(
@@ -75,7 +86,8 @@ class MyDrawer extends StatelessWidget {
                 style: kDrawerTextStyle,
               ),
               onTap: () {
-                Navigator.of(context).pushReplacementNamed(SettingsScreen.routeName);
+                Navigator.of(context)
+                    .pushReplacementNamed(SettingsScreen.routeName);
               },
             ),
           ],
