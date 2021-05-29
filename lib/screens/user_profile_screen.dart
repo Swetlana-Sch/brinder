@@ -61,6 +61,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                   phoneController: phoneController,
                 ),
           MyCatsPanel(),
+
         ],
       ),
     );

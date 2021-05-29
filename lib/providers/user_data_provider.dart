@@ -41,6 +41,5 @@ class UserDataProvider with ChangeNotifier{
         catCity: 'Kherson',
         catAge: 5,
         catDescription: 'Beautiful Georgian looking cat'),
-    CatModel(catName: 'asdasd'),
   ];
 }
