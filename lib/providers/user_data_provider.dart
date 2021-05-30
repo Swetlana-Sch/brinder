@@ -172,8 +172,9 @@ class UserDataProvider with ChangeNotifier {
       catGender: newGender,
       catDescription: newCatDescription,
     );
-    print('CatModel: ${newCatModel}');
+    print('CatModel: $newCatModel');
     myCats.add(newCatModel);
+    print('CatModel: $newCatModel');
     notifyListeners();
   }
 }

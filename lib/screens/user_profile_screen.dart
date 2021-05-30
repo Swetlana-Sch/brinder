@@ -47,22 +47,24 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
           )
         ],
       ),
-      body: Column(
-        children: [
-          _isEditMode == false
-              ? ViewModeUserInfoCard(
-                  name: nameController.text,
-                  city: cityController.text,
-                  number: phoneController.text,
-                )
-              : EditModeUserInfoCard(
-                  nameController: nameController,
-                  cityController: cityController,
-                  phoneController: phoneController,
-                ),
-          MyCatsPanel(),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            _isEditMode == false
+                ? ViewModeUserInfoCard(
+                    name: nameController.text,
+                    city: cityController.text,
+                    number: phoneController.text,
+                  )
+                : EditModeUserInfoCard(
+                    nameController: nameController,
+                    cityController: cityController,
+                    phoneController: phoneController,
+                  ),
+            MyCatsPanel(),
 
-        ],
+          ],
+        ),
       ),
     );
   }
