@@ -12,6 +12,7 @@ const kFaceBookSignInTextColor = Colors.white;
 const kEmailSignInButtonColor = Colors.teal;
 const kEmailSignInTextColor = Colors.white;
 
+const String kBurgerIconDrawer = 'images/burger_icon.png';
 
 ThemeData lightTheme = ThemeData(
 //TODO: add textTheme

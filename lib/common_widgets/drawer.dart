@@ -17,14 +17,15 @@ class MyDrawer extends StatelessWidget {
         child: Column(
           children: [
             AppBar(
-              // automaticallyImplyLeading: false,
-              leading: IconButton(
-                // TODO: Change icon to Image.asset https://flutter.dev/docs/development/ui/assets-and-images#resolution-aware
-                icon: Icon(Icons.format_list_bulleted_rounded),
+              automaticallyImplyLeading: false,
+              leading:
+              IconButton(
+                icon: Image.asset(kBurgerIconDrawer),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
               ),
+
               title: Text(
                 'Brinder',
                 style: kAppBarTextStyle,
@@ -33,42 +34,42 @@ class MyDrawer extends StatelessWidget {
             Divider(),
             DrawerListTile(
               sectionName: 'Home',
-              goToScreen: (){
+              onItemTap: () {
                 Navigator.of(context)
                     .pushReplacementNamed(HomePageScreen.routeName);
               },
             ),
             DrawerListTile(
               sectionName: 'My Profile',
-              goToScreen: (){
+              onItemTap: () {
                 Navigator.of(context)
                     .pushReplacementNamed(UserProfileScreen.routeName);
               },
             ),
             DrawerListTile(
               sectionName: 'Search',
-              goToScreen: (){
+              onItemTap: () {
                 Navigator.of(context)
                     .pushReplacementNamed(SearchScreen.routeName);
               },
             ),
             DrawerListTile(
               sectionName: 'Messages',
-              goToScreen: (){
+              onItemTap: () {
                 Navigator.of(context)
                     .pushReplacementNamed(MessagesScreen.routeName);
               },
             ),
             DrawerListTile(
               sectionName: 'Favourites',
-              goToScreen: (){
+              onItemTap: () {
                 Navigator.of(context)
                     .pushReplacementNamed(FavouritesScreen.routeName);
               },
             ),
             DrawerListTile(
               sectionName: 'Settings',
-              goToScreen: (){
+              onItemTap: () {
                 Navigator.of(context)
                     .pushReplacementNamed(SettingsScreen.routeName);
               },

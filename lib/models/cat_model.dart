@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:matching_cats/utils/app_utils.dart';
 
 enum CatGender {
@@ -11,7 +13,7 @@ final typeValues =
 
 class CatModel {
   String? catName;
-  String? catImage;
+  File? catImage;
   String? catBread;
   double? catPrice;
   String? catCity;
@@ -27,12 +29,12 @@ class CatModel {
     this.catCity,
     this.catAge,
     this.catDescription,
-    this.catGender = CatGender.male,
+    this.catGender,
   });
 
   @override
   String toString() {
-    return 'CatModel{catName: $catName, catImage: $catImage, catBread: $catBread, catPrice: $catPrice, catCity: $catCity, catAge: $catAge, catDescription: $catDescription}';
+    return 'CatModel{catName: $catName, catImage: $catImage, catBread: $catBread, catPrice: $catPrice, catCity: $catCity, catAge: $catAge, catDescription: $catDescription, catGender: $catGender}';
   }
 
   // factory Hit.fromJson(Map<String, dynamic> json) => Hit(

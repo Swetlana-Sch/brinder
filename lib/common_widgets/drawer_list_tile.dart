@@ -4,9 +4,9 @@ import 'package:matching_cats/theme.dart';
 
 class DrawerListTile extends StatelessWidget {
   final String sectionName;
-  final Function goToScreen;
+  final Function onItemTap;
 
-  const DrawerListTile({Key? key, required this.sectionName, required this.goToScreen}) : super(key: key);
+  const DrawerListTile({Key? key, required this.sectionName, required this.onItemTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class DrawerListTile extends StatelessWidget {
         style: kDrawerTextStyle,
       ),
       onTap: () {
-        goToScreen();
+        onItemTap();
       },
     );
   }

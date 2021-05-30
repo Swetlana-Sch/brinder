@@ -40,7 +40,8 @@ class MyCatsPanel extends StatelessWidget {
               itemBuilder: (BuildContext cxt, int index) {
                 return Row(
                   children: [
-                      Text(catData.myCats[index].catName!)
+                      Text(catData.myCats[index].catName!),
+                    // Image.file(''),
                   ],
                 );
               },
