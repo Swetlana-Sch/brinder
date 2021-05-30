@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:matching_cats/common_widgets/drawer_list_tile.dart';
 import 'package:matching_cats/theme.dart';
 import 'package:matching_cats/screens/favourites_screen.dart';
 import 'package:matching_cats/screens/home_page_screen.dart';
@@ -16,7 +17,7 @@ class MyDrawer extends StatelessWidget {
         child: Column(
           children: [
             AppBar(
-// automaticallyImplyLeading: false,
+              // automaticallyImplyLeading: false,
               leading: IconButton(
                 // TODO: Change icon to Image.asset https://flutter.dev/docs/development/ui/assets-and-images#resolution-aware
                 icon: Icon(Icons.format_list_bulleted_rounded),
@@ -30,62 +31,44 @@ class MyDrawer extends StatelessWidget {
               ),
             ),
             Divider(),
-            ListTile(
-              title: Text(
-                'Home',
-                style: kDrawerTextStyle,
-              ),
-              onTap: () {
+            DrawerListTile(
+              sectionName: 'Home',
+              goToScreen: (){
                 Navigator.of(context)
                     .pushReplacementNamed(HomePageScreen.routeName);
               },
             ),
-            ListTile(
-              title: Text(
-                'User Profile',
-                style: kDrawerTextStyle,
-              ),
-              onTap: () {
+            DrawerListTile(
+              sectionName: 'My Profile',
+              goToScreen: (){
                 Navigator.of(context)
                     .pushReplacementNamed(UserProfileScreen.routeName);
               },
             ),
-            ListTile(
-              title: Text(
-                'Search',
-                style: kDrawerTextStyle,
-              ),
-              onTap: () {
+            DrawerListTile(
+              sectionName: 'Search',
+              goToScreen: (){
                 Navigator.of(context)
                     .pushReplacementNamed(SearchScreen.routeName);
               },
             ),
-            ListTile(
-              title: Text(
-                'Messages',
-                style: kDrawerTextStyle,
-              ),
-              onTap: () {
+            DrawerListTile(
+              sectionName: 'Messages',
+              goToScreen: (){
                 Navigator.of(context)
                     .pushReplacementNamed(MessagesScreen.routeName);
               },
             ),
-            ListTile(
-              title: Text(
-                'Favourites',
-                style: kDrawerTextStyle,
-              ),
-              onTap: () {
+            DrawerListTile(
+              sectionName: 'Favourites',
+              goToScreen: (){
                 Navigator.of(context)
                     .pushReplacementNamed(FavouritesScreen.routeName);
               },
             ),
-            ListTile(
-              title: Text(
-                'Settings',
-                style: kDrawerTextStyle,
-              ),
-              onTap: () {
+            DrawerListTile(
+              sectionName: 'Settings',
+              goToScreen: (){
                 Navigator.of(context)
                     .pushReplacementNamed(SettingsScreen.routeName);
               },
