@@ -17,11 +17,13 @@ import 'package:matching_cats/screens/settings_screen.dart';
 import 'package:matching_cats/screens/user_profile_screen.dart';
 import 'package:matching_cats/theme.dart';
 import 'package:provider/provider.dart';
-
 import 'screens/sign_in_page.dart';
+import 'package:flutter/services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   await Firebase.initializeApp();
   runApp(CatsMatchApp());
 }

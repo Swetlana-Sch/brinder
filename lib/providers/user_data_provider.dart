@@ -160,7 +160,7 @@ class UserDataProvider with ChangeNotifier {
       required double newPrice,
       required String newCity,
       required double newAge,
-      required CatGender newGender,
+        required CatGender newGender,
       required String newCatDescription}) {
     final newCatModel = CatModel(
       catName: newName,

@@ -105,6 +105,7 @@ class _AddCatScreenState extends State<AddCatScreen> {
                     Text('Name:'),
                     Expanded(
                       child: TextFormField(
+                        textCapitalization: TextCapitalization.sentences,
                         onChanged: (String? newCatName) {
                           setState(() {
                             catName = newCatName;
@@ -125,6 +126,7 @@ class _AddCatScreenState extends State<AddCatScreen> {
                     Text('City:'),
                     Expanded(
                       child: TextFormField(
+                        textCapitalization: TextCapitalization.sentences,
                         onChanged: (String? newCatCity) {
                           setState(() {
                             catCity = newCatCity;
@@ -145,6 +147,7 @@ class _AddCatScreenState extends State<AddCatScreen> {
                     Text('Description:'),
                     Expanded(
                       child: TextFormField(
+                        textCapitalization: TextCapitalization.sentences,
                         onChanged: (String? newCatDescription) {
                           setState(() {
                             catDescription = newCatDescription;
