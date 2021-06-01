@@ -2,17 +2,17 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:matching_cats/common_widgets/drawer.dart';
-import 'package:matching_cats/models/cat_model.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:matching_cats/models/cat_model.dart';
 import 'package:matching_cats/providers/user_data_provider.dart';
 import 'package:matching_cats/screens/breed_screen.dart';
+import 'package:matching_cats/theme.dart';
 import 'package:provider/provider.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 class AddCatScreen extends StatefulWidget {
   static const routeName = '/add_cat_screen';
+
   @override
   _AddCatScreenState createState() => _AddCatScreenState();
 }
@@ -26,8 +26,10 @@ class _AddCatScreenState extends State<AddCatScreen> {
   double? catAge;
   double? catPrice;
   File? catImage;
-  CatGender? catGender;
+  CatGender catGender = CatGender.male;
   String? catBreed;
+
+  bool showImageErrorText = false;
 
   Future getImage() async {
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
@@ -35,6 +37,7 @@ class _AddCatScreenState extends State<AddCatScreen> {
     setState(() {
       if (pickedFile != null) {
         catImage = File(pickedFile.path);
+        showImageErrorText = false;
       } else {
         print('No image selected.');
       }
@@ -49,28 +52,42 @@ class _AddCatScreenState extends State<AddCatScreen> {
         title: Text('Add new cat'),
         actions: [
           IconButton(
-            icon: Icon(
-              Icons.save,
-            ),
-            onPressed: () {
-              print('Presses saved');
-              print('cat name: $catName');
-              if (_formKey.currentState!.validate()) {
-                catData.saveCatData(
-                  newName: catName!,
-                  newImage: catImage!,
-                  newBread: 'Spss',
-                  newPrice: catPrice!,
-                  newCity: catCity!,
-                  newAge: catAge!,
-                  newCatDescription: catDescription!,
-                  newGender: catGender!,
-                );
-                Navigator.of(context).pop();
-              }
-              ;
-            },
-          ),
+              icon: Icon(
+                Icons.save,
+              ),
+              onPressed: () {
+                print('Presses saved');
+                print('cat name: $catName');
+                if (_formKey.currentState!.validate() &&
+                    (catBreed != null) &&
+                    (catImage != null)) {
+                  catData.saveCatData(
+                    newName: catName!,
+                    newImage: catImage!,
+                    newBread: catBreed!,
+                    newPrice: catPrice!,
+                    newCity: catCity!,
+                    newAge: catAge!,
+                    newCatDescription: catDescription!,
+                    newGender: catGender,
+                  );
+                  Navigator.of(context).pop();
+                } else {
+                  if (catBreed == null) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: const Text('Please select the breed'),
+                        duration: const Duration(seconds: 1),
+                      ),
+                    );
+                  }
+                  if (catImage == null) {
+                   setState(() {
+                     showImageErrorText = true;
+                   });
+                  }
+                }
+              }),
         ],
       ),
       body: SingleChildScrollView(
@@ -84,7 +101,7 @@ class _AddCatScreenState extends State<AddCatScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text('Breed:'),
-                    Text(catBreed == null ? '' : catBreed!),
+                    if (catBreed != null) Text(catBreed!),
                     ElevatedButton(
                         onPressed: () async {
                           final resultBreed = await Navigator.push(
@@ -216,6 +233,8 @@ class _AddCatScreenState extends State<AddCatScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text('Select image:'),
+                    // if(catImage == null)
+                    if (showImageErrorText == true) ImageMissingErrorText(textError: 'Please select the image',),
                     FloatingActionButton(
                       onPressed: () {
                         getImage();
@@ -258,6 +277,19 @@ class _AddCatScreenState extends State<AddCatScreen> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class ImageMissingErrorText extends StatelessWidget {
+  final String? textError;
+  const ImageMissingErrorText({
+    Key? key, this.textError,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text( textError!, style: kErrorMissedImageTextStyle,
     );
   }
 }

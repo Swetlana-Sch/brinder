@@ -18,7 +18,6 @@ class MyCatsPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     final catData = context.watch<UserDataProvider>();
     return SingleChildScrollView(
-      physics: AlwaysScrollableScrollPhysics(),
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
@@ -44,6 +43,7 @@ class MyCatsPanel extends StatelessWidget {
             ),
             ListView.builder(
               shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
               itemBuilder: (BuildContext cxt, int index) {
                 return Container(
                   width: MediaQuery.of(context).size.width * 0.8,

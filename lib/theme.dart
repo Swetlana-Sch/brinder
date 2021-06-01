@@ -42,6 +42,11 @@ const kDrawerTextStyle = TextStyle(
   color: Colors.white,
 );
 
+const kErrorMissedImageTextStyle = TextStyle(
+    fontSize: 12,
+    color: Color(0xFFC2185B),
+    fontWeight: FontWeight.w400);
+
 final ButtonStyle kElevatedButtonStyle = ElevatedButton.styleFrom(
   onPrimary: Colors.white,
   primary: kAppBarColor,
