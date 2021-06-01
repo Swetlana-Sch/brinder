@@ -62,7 +62,7 @@ class MyCatsPanel extends StatelessWidget {
                               File.fromUri(catData.myCats[index].catImage!.uri),
                               width: 50,
                               height: 50,
-                              fit: BoxFit.fill,
+                              fit: BoxFit.cover,
                             ),
                           ),
                           flex: 1,
