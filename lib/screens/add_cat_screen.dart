@@ -28,7 +28,14 @@ class _AddCatScreenState extends State<AddCatScreen> {
   File? catImage;
   CatGender catGender = CatGender.male;
   String? catBreed;
+  FocusNode? nameFocusNode;
+  FocusNode? cityFocusNode;
 
+  // in EDIT CAT SCREEN init state
+  // catName = widget.catModel.catName
+  // ...
+  // in form field:
+  // initialValue: widget.catModel.catName,
   bool showImageErrorText = false;
 
   Future getImage() async {
@@ -42,6 +49,23 @@ class _AddCatScreenState extends State<AddCatScreen> {
         print('No image selected.');
       }
     });
+  }
+
+  @override
+  void initState() {
+    nameFocusNode = FocusNode();
+    cityFocusNode = FocusNode();
+    // listen to focus changes
+    nameFocusNode!.addListener(
+        () => print('focusNode updated: hasFocus: ${nameFocusNode!.hasFocus}'));
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    nameFocusNode?.dispose();
+    cityFocusNode?.dispose();
+    super.dispose();
   }
 
   @override
@@ -82,9 +106,9 @@ class _AddCatScreenState extends State<AddCatScreen> {
                     );
                   }
                   if (catImage == null) {
-                   setState(() {
-                     showImageErrorText = true;
-                   });
+                    setState(() {
+                      showImageErrorText = true;
+                    });
                   }
                 }
               }),
@@ -122,6 +146,8 @@ class _AddCatScreenState extends State<AddCatScreen> {
                     Text('Name:'),
                     Expanded(
                       child: TextFormField(
+                        focusNode: nameFocusNode,
+                        textInputAction: TextInputAction.next,
                         textCapitalization: TextCapitalization.sentences,
                         onChanged: (String? newCatName) {
                           setState(() {
@@ -134,6 +160,10 @@ class _AddCatScreenState extends State<AddCatScreen> {
                           }
                           return null;
                         },
+                        onFieldSubmitted: (term) {
+                          print('onFieldSubmitted: ${term}');
+                          cityFocusNode?.requestFocus();
+                        },
                       ),
                     ),
                   ],
@@ -143,6 +173,8 @@ class _AddCatScreenState extends State<AddCatScreen> {
                     Text('City:'),
                     Expanded(
                       child: TextFormField(
+                        textInputAction: TextInputAction.next,
+                        // focusNode: cityFocusNode,
                         textCapitalization: TextCapitalization.sentences,
                         onChanged: (String? newCatCity) {
                           setState(() {
@@ -164,6 +196,8 @@ class _AddCatScreenState extends State<AddCatScreen> {
                     Text('Description:'),
                     Expanded(
                       child: TextFormField(
+                        textInputAction: TextInputAction.next,
+                        // focusNode: descriptionFocusNode,
                         textCapitalization: TextCapitalization.sentences,
                         onChanged: (String? newCatDescription) {
                           setState(() {
@@ -185,6 +219,8 @@ class _AddCatScreenState extends State<AddCatScreen> {
                     Text('Cat Age:'),
                     Expanded(
                       child: TextFormField(
+                        textInputAction: TextInputAction.next,
+                        // focusNode: ageFocusNode,
                         keyboardType:
                             TextInputType.numberWithOptions(decimal: true),
                         onChanged: (String? newCatAge) {
@@ -209,6 +245,8 @@ class _AddCatScreenState extends State<AddCatScreen> {
                     Text('Cat Price:'),
                     Expanded(
                       child: TextFormField(
+                        textInputAction: TextInputAction.next,
+                        // focusNode: priceFocusNode,
                         keyboardType:
                             TextInputType.numberWithOptions(decimal: true),
                         onChanged: (String? newCatPrice) {
@@ -234,7 +272,10 @@ class _AddCatScreenState extends State<AddCatScreen> {
                   children: [
                     Text('Select image:'),
                     // if(catImage == null)
-                    if (showImageErrorText == true) ImageMissingErrorText(textError: 'Please select the image',),
+                    if (showImageErrorText == true)
+                      ImageMissingErrorText(
+                        textError: 'Please select the image',
+                      ),
                     FloatingActionButton(
                       onPressed: () {
                         getImage();
@@ -283,13 +324,17 @@ class _AddCatScreenState extends State<AddCatScreen> {
 
 class ImageMissingErrorText extends StatelessWidget {
   final String? textError;
+
   const ImageMissingErrorText({
-    Key? key, this.textError,
+    Key? key,
+    this.textError,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Text( textError!, style: kErrorMissedImageTextStyle,
+    return Text(
+      textError!,
+      style: kErrorMissedImageTextStyle,
     );
   }
 }

@@ -6,7 +6,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:matching_cats/models/cat_model.dart';
 import 'package:matching_cats/providers/user_data_provider.dart';
 import 'package:matching_cats/screens/add_cat_screen.dart';
-import 'package:matching_cats/theme.dart';
 import 'package:provider/provider.dart';
 
 class MyCatsPanel extends StatelessWidget {
@@ -43,7 +42,7 @@ class MyCatsPanel extends StatelessWidget {
             ),
             ListView.builder(
               shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
+              physics: NeverScrollableScrollPhysics(),
               itemBuilder: (BuildContext cxt, int index) {
                 return Container(
                   width: MediaQuery.of(context).size.width * 0.8,
@@ -67,16 +66,23 @@ class MyCatsPanel extends StatelessWidget {
                           ),
                           flex: 1,
                         ),
-                        Expanded(child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Text(catData.myCats[index].catName!),
-                        ), flex: 3,),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Text(catData.myCats[index].catName!),
+                          ),
+                          flex: 3,
+                        ),
                         catData.myCats[index].catGender! == CatGender.male
                             ? Icon(FontAwesomeIcons.mars)
                             : Icon(FontAwesomeIcons.venus),
-                        IconButton(icon: Icon(Icons.edit),onPressed: (){
-                          print('Pressed edit cat');
-                        },)
+                        IconButton(
+                          icon: Icon(Icons.edit),
+                          onPressed: () {
+                            print('Pressed edit cat');
+                            // Navigator push EditCatScreen(catModel: catData.myCats[index])
+                          },
+                        )
                       ],
                     ),
                   ),
