@@ -3,11 +3,13 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:matching_cats/models/cat_model.dart';
 import 'package:provider/provider.dart';
+import 'package:short_uuids/short_uuids.dart';
 
 class UserDataProvider with ChangeNotifier {
   String? userName = 'John';
   String? userCity = 'Bonn';
   String? userPhoneNumber = '123-456-789';
+  final shortID = ShortUuid();
   List<CatModel> myCats = [
     //   CatModel(
     //       catName: 'Lucy',
@@ -154,7 +156,8 @@ class UserDataProvider with ChangeNotifier {
   }
 
   void saveCatData(
-      {required String newName,
+      {
+        required String newName,
       required File newImage,
       required String newBread,
       required double newPrice,
@@ -163,6 +166,7 @@ class UserDataProvider with ChangeNotifier {
         required CatGender newGender,
       required String newCatDescription}) {
     final newCatModel = CatModel(
+      catID: shortID.generate(),
       catName: newName,
       catImage: newImage,
       catBread: newBread,

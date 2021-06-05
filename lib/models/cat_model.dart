@@ -12,6 +12,7 @@ final typeValues =
     EnumValues({"male": CatGender.male, 'female': CatGender.female});
 
 class CatModel {
+  String? catID;
   String? catName;
   File? catImage;
   String? catBread;
@@ -22,6 +23,7 @@ class CatModel {
   CatGender? catGender;
 
   CatModel({
+    this.catID,
     this.catName,
     this.catImage,
     this.catBread,
@@ -34,7 +36,7 @@ class CatModel {
 
   @override
   String toString() {
-    return 'CatModel{catName: $catName, catImage: $catImage, catBread: $catBread, catPrice: $catPrice, catCity: $catCity, catAge: $catAge, catDescription: $catDescription, catGender: $catGender}';
+    return 'CatModel{catID: $catID, catName: $catName, catImage: $catImage, catBread: $catBread, catPrice: $catPrice, catCity: $catCity, catAge: $catAge, catDescription: $catDescription, catGender: $catGender}';
   }
 
   // factory Hit.fromJson(Map<String, dynamic> json) => Hit(
@@ -48,6 +50,7 @@ class CatModel {
   //     }
 
   factory CatModel.fromJson(Map<String, dynamic> json) => CatModel(
+        catID: json['cat_id'],
         catName: json['cat_name'],
         catImage: json['cat_url'],
         catBread: json['cat_bread'],
@@ -59,6 +62,7 @@ class CatModel {
       );
 
   Map<String, dynamic> toJson() => {
+        'cat_id': catID,
         'cat_name': catName,
         'cat_url': catImage,
         'cat_bread': catBread,
