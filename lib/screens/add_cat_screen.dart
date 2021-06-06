@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:matching_cats/models/cat_model.dart';
 import 'package:matching_cats/providers/user_data_provider.dart';
 import 'package:matching_cats/screens/breed_screen.dart';
+import 'package:matching_cats/screens/user_profile_screen.dart';
 import 'package:matching_cats/theme.dart';
 import 'package:provider/provider.dart';
 import 'package:toggle_switch/toggle_switch.dart';
@@ -94,7 +95,8 @@ class _AddCatScreenState extends State<AddCatScreen> {
                     newCatDescription: catDescription!,
                     newGender: catGender,
                   );
-                  Navigator.of(context).pop();
+                  // Navigator.of(context).pop();
+                  Navigator.of(context).pushNamed(UserProfileScreen.routeName);
                 } else {
                   if (catBreed == null) {
                     ScaffoldMessenger.of(context).showSnackBar(
