@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:matching_cats/models/cat_model.dart';
-import 'package:provider/provider.dart';
 import 'package:short_uuids/short_uuids.dart';
 
 class UserDataProvider with ChangeNotifier {
@@ -156,14 +155,13 @@ class UserDataProvider with ChangeNotifier {
   }
 
   void saveCatData(
-      {
-        required String newName,
+      {required String newName,
       required File newImage,
       required String newBread,
       required double newPrice,
       required String newCity,
       required double newAge,
-        required CatGender newGender,
+      required CatGender newGender,
       required String newCatDescription}) {
     final newCatModel = CatModel(
       catID: shortID.generate(),
@@ -179,6 +177,45 @@ class UserDataProvider with ChangeNotifier {
     print('CatModel: $newCatModel');
     myCats.add(newCatModel);
     print('CatModel: $newCatModel');
+    notifyListeners();
+  }
+
+  void updateCatData(
+      {required String catID,
+      required String updatedName,
+      required File updatedImage,
+      required String updatedBread,
+      required double updatedPrice,
+      required String updatedCity,
+      required double updatedAge,
+      required CatGender updatedGender,
+      required String updatedCatDescription}) {
+    print('CatID: $catID');
+    var existingCat = myCats.firstWhere((cat) => cat.catID == catID);
+
+    // THis and code below are the same
+    existingCat.catID = catID;
+    existingCat.catName = updatedName;
+    existingCat.catImage = updatedImage;
+    existingCat.catBread = updatedBread;
+    existingCat.catPrice = updatedPrice;
+    existingCat.catCity = updatedCity;
+    existingCat.catAge = updatedAge;
+    existingCat.catGender = updatedGender;
+    existingCat.catDescription = updatedCatDescription;
+
+    // existingCat
+    //   ..catID = catID
+    //   ..catName = updatedName
+    //   ..catImage = updatedImage
+    //   ..catBread = updatedBread
+    //   ..catPrice = updatedPrice
+    //   ..catCity = updatedCity
+    //   ..catAge = updatedAge
+    //   ..catGender = updatedGender
+    //   ..catDescription = updatedCatDescription;
+
+    print('CatModel: $existingCat');
     notifyListeners();
   }
 }

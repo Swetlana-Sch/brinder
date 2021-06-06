@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:matching_cats/models/cat_model.dart';
 import 'package:matching_cats/providers/user_data_provider.dart';
 import 'package:matching_cats/screens/add_cat_screen.dart';
+import 'package:matching_cats/screens/edit_cat_screen.dart';
 import 'package:provider/provider.dart';
 
 class MyCatsPanel extends StatelessWidget {
@@ -78,10 +79,14 @@ class MyCatsPanel extends StatelessWidget {
                             : Icon(FontAwesomeIcons.venus),
                         IconButton(
                           icon: Icon(Icons.edit),
-                          onPressed: () {
-                            print('Pressed edit cat');
-                            // Navigator push EditCatScreen(catModel: catData.myCats[index])
+                          onPressed: () async {
+                            final catToEdit = await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => EditCatScreen(catModel: catData.myCats[index]),
+                                ));
                           },
+                          // Navigator push EditCatScreen(catModel: catData.myCats[index])
                         )
                       ],
                     ),

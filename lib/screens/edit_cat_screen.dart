@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
@@ -9,14 +10,18 @@ import 'package:matching_cats/theme.dart';
 import 'package:provider/provider.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
-class AddCatScreen extends StatefulWidget {
-  static const routeName = '/add_cat_screen';
+class EditCatScreen extends StatefulWidget {
+  final CatModel? catModel;
+
+  static const routeName = '/edit_cat_screen';
+
+  const EditCatScreen({Key? key, this.catModel}) : super(key: key);
 
   @override
-  _AddCatScreenState createState() => _AddCatScreenState();
+  _EditCatScreenState createState() => _EditCatScreenState();
 }
 
-class _AddCatScreenState extends State<AddCatScreen> {
+class _EditCatScreenState extends State<EditCatScreen> {
   final picker = ImagePicker();
   final _formKey = GlobalKey<FormState>();
   String? catName;
@@ -25,7 +30,7 @@ class _AddCatScreenState extends State<AddCatScreen> {
   double? catAge;
   double? catPrice;
   File? catImage;
-  CatGender catGender = CatGender.male;
+  late CatGender catGender;
   String? catBreed;
   FocusNode? nameFocusNode;
   FocusNode? cityFocusNode;
@@ -52,19 +57,15 @@ class _AddCatScreenState extends State<AddCatScreen> {
 
   @override
   void initState() {
-    nameFocusNode = FocusNode();
-    cityFocusNode = FocusNode();
-    // listen to focus changes
-    nameFocusNode!.addListener(
-        () => print('focusNode updated: hasFocus: ${nameFocusNode!.hasFocus}'));
+    catName = widget.catModel!.catName;
+    catCity = widget.catModel!.catCity;
+    catDescription = widget.catModel!.catDescription;
+    catAge = widget.catModel!.catAge;
+    catPrice = widget.catModel!.catPrice;
+    catImage = widget.catModel!.catImage;
+    catGender = widget.catModel?.catGender ?? CatGender.male;
+    catBreed = widget.catModel!.catBread;
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    nameFocusNode?.dispose();
-    cityFocusNode?.dispose();
-    super.dispose();
   }
 
   @override
@@ -72,27 +73,27 @@ class _AddCatScreenState extends State<AddCatScreen> {
     final catData = context.read<UserDataProvider>();
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add new cat'),
+        title: Text('Edit cat'),
         actions: [
           IconButton(
               icon: Icon(
                 Icons.save,
               ),
               onPressed: () {
-                print('Presses saved');
-                print('cat name: $catName');
+                print('Presses updated');
                 if (_formKey.currentState!.validate() &&
                     (catBreed != null) &&
                     (catImage != null)) {
-                  catData.saveCatData(
-                    newName: catName!,
-                    newImage: catImage!,
-                    newBread: catBreed!,
-                    newPrice: catPrice!,
-                    newCity: catCity!,
-                    newAge: catAge!,
-                    newCatDescription: catDescription!,
-                    newGender: catGender,
+                  catData.updateCatData(
+                    catID: widget.catModel!.catID!,
+                    updatedName: catName!,
+                    updatedImage: catImage!,
+                    updatedBread: catBreed!,
+                    updatedPrice: catPrice!,
+                    updatedCity: catCity!,
+                    updatedAge: catAge!,
+                    updatedCatDescription: catDescription!,
+                    updatedGender: catGender,
                   );
                   Navigator.of(context).pop();
                 } else {
@@ -119,6 +120,7 @@ class _AddCatScreenState extends State<AddCatScreen> {
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -145,6 +147,7 @@ class _AddCatScreenState extends State<AddCatScreen> {
                     Text('Name:'),
                     Expanded(
                       child: TextFormField(
+                        initialValue: widget.catModel!.catName,
                         focusNode: nameFocusNode,
                         textInputAction: TextInputAction.next,
                         textCapitalization: TextCapitalization.sentences,
@@ -172,6 +175,7 @@ class _AddCatScreenState extends State<AddCatScreen> {
                     Text('City:'),
                     Expanded(
                       child: TextFormField(
+                        initialValue: widget.catModel!.catCity,
                         textInputAction: TextInputAction.next,
                         // focusNode: cityFocusNode,
                         textCapitalization: TextCapitalization.sentences,
@@ -195,6 +199,7 @@ class _AddCatScreenState extends State<AddCatScreen> {
                     Text('Description:'),
                     Expanded(
                       child: TextFormField(
+                        initialValue: widget.catModel!.catDescription,
                         textInputAction: TextInputAction.next,
                         // focusNode: descriptionFocusNode,
                         textCapitalization: TextCapitalization.sentences,
@@ -218,6 +223,8 @@ class _AddCatScreenState extends State<AddCatScreen> {
                     Text('Cat Age:'),
                     Expanded(
                       child: TextFormField(
+                        initialValue:
+                            widget.catModel!.catAge!.toStringAsFixed(0),
                         textInputAction: TextInputAction.next,
                         // focusNode: ageFocusNode,
                         keyboardType:
@@ -244,6 +251,8 @@ class _AddCatScreenState extends State<AddCatScreen> {
                     Text('Cat Price:'),
                     Expanded(
                       child: TextFormField(
+                        initialValue:
+                            widget.catModel!.catPrice!.toStringAsFixed(0),
                         textInputAction: TextInputAction.next,
                         // focusNode: priceFocusNode,
                         keyboardType:
@@ -260,28 +269,6 @@ class _AddCatScreenState extends State<AddCatScreen> {
                           return null;
                         },
                       ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('Select image:'),
-                    // if(catImage == null)
-                    if (showImageErrorText == true)
-                      ImageMissingErrorText(
-                        textError: 'Please select the image',
-                      ),
-                    FloatingActionButton(
-                      onPressed: () {
-                        getImage();
-                        print('get image pressed');
-                      },
-                      tooltip: 'Pick Image',
-                      child: Icon(Icons.photo_filter),
                     ),
                   ],
                 ),
@@ -310,6 +297,36 @@ class _AddCatScreenState extends State<AddCatScreen> {
                         // });
                       },
                     ),
+                  ],
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Change image:', textAlign: TextAlign.left,),
+                  ],
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Image(
+                            image: FileImage(catImage!),
+                            width: 250,
+                            height: 180,
+                      fit: BoxFit.cover,
+                          ),
+                    FloatingActionButton(
+                            onPressed: () {
+                              getImage();
+                              print('get image pressed');
+                            },
+                            child: Icon(Icons.edit, color: Colors.white,),
+                          ),
                   ],
                 )
               ],

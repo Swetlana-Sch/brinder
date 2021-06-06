@@ -33,8 +33,6 @@ class _SignInPageState extends State<SignInPage> {
     final auth = Provider.of<Authentication>(context);
     print('Auth loading: ${auth.isLoading}');
     return Scaffold(
-      drawer: MyDrawer(
-      ),
       backgroundColor: kBackgroundLaunchColor,
       body: AnimatedOpacity(
         duration: Duration(milliseconds: 1000),
