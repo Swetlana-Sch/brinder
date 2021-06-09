@@ -8,6 +8,7 @@ import 'package:matching_cats/providers/authentication_provider.dart';
 import 'package:matching_cats/providers/user_data_provider.dart';
 import 'package:matching_cats/screens/add_cat_screen.dart';
 import 'package:matching_cats/screens/breed_screen.dart';
+import 'package:matching_cats/screens/detail_cat_screen.dart';
 import 'package:matching_cats/screens/edit_cat_screen.dart';
 import 'package:matching_cats/screens/email_sign_in_page.dart';
 import 'package:matching_cats/screens/favourites_screen.dart';
@@ -55,6 +56,7 @@ class CatsMatchApp extends StatelessWidget {
           AddCatScreen.routeName: (ctx) => AddCatScreen(),
           BreedsScreen.routeName: (ctx) => BreedsScreen(),
           EditCatScreen.routeName: (ctx) => EditCatScreen(),
+          DetailCatScreen.routeName: (ctx) => DetailCatScreen(),
         },
         home: SplashPage(),
         // FutureBuilder(

@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:matching_cats/models/cat_model.dart';
 import 'package:matching_cats/providers/user_data_provider.dart';
 import 'package:matching_cats/screens/add_cat_screen.dart';
+import 'package:matching_cats/screens/detail_cat_screen.dart';
 import 'package:matching_cats/screens/edit_cat_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -55,24 +56,43 @@ class MyCatsPanel extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
-                          child: Container(
-                            // width: 50,
-                            // height: 50,
-                            child: Image.file(
-                              File.fromUri(catData.myCats[index].catImage!.uri),
-                              width: 50,
-                              height: 50,
-                              fit: BoxFit.cover,
+                          child: InkWell(
+                            child: Expanded(
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: Container(
+                                      // width: 50,
+                                      // height: 50,
+                                      child: Image.file(
+                                        File.fromUri(
+                                            catData.myCats[index].catImage!.uri),
+                                        width: 50,
+                                        height: 50,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    flex: 1,
+                                  ),
+                                  Expanded(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: Text(catData.myCats[index].catName!),
+                                    ),
+                                    flex: 3,
+                                  ),
+                                ],
+                              ),
                             ),
+                            onTap: (){
+                             // Navigator.of(context).pushNamed(DetailCatScreen.routeName);
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => DetailCatScreen(catModel: catData.myCats[index],),
+                                  ));
+                            },
                           ),
-                          flex: 1,
-                        ),
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Text(catData.myCats[index].catName!),
-                          ),
-                          flex: 3,
                         ),
                         catData.myCats[index].catGender! == CatGender.male
                             ? Icon(FontAwesomeIcons.mars)
@@ -83,7 +103,8 @@ class MyCatsPanel extends StatelessWidget {
                             final catToEdit = await Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => EditCatScreen(catModel: catData.myCats[index]),
+                                  builder: (context) => EditCatScreen(
+                                      catModel: catData.myCats[index]),
                                 ));
                           },
                           // Navigator push EditCatScreen(catModel: catData.myCats[index])
